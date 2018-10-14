@@ -1,0 +1,1146 @@
+MPASM 5.76             LED_PATTERNS_F629.ASM   12-10-2017  10:08:52         PAGE  1
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00001 ;************************************************************************
+                      00002 ;
+                      00003 ;   Filename:      led_patterns_f629.asm
+                      00004 ;   Date:          30 November 2017
+                      00005 ;   Revised:       9 December 2017 
+                      00006 ;   File Version:  0.2
+                      00007 ;
+                      00008 ;   Author:       Matt Foreman
+                      00009 ;   Company:      _FM - Foreman Machines
+                      00010 ;
+                      00011 ;************************************************************************
+                      00012 ;
+                      00013 ;   Processor:     12F629
+                      00014 ;
+                      00015 ;   Dependencies: none
+                      00016 ;
+                      00017 ;************************************************************************
+                      00018 ;
+                      00019 ;   Description:    led sequencing for pic1f629 led card project
+                      00020 ;
+                      00021 ;   CHANGELOG
+                      00022 ;   
+                      00023 ;   0.2 - 9 DEC 2017
+                      00024 ;       Added basic sequencing
+                      00025 ;       TODO: 
+                      00026 ;               Button to move through sequences
+                      00027 ;               Sequences through tables?
+                      00028 ;
+                      00029 ;************************************************************************
+                      00030 ;
+                      00031 ;   Pin assignments:
+                      00032 ;       GP0 = CONTROL (led common)
+                      00033 ;       GP1 = RED
+                      00034 ;       GP2 = GREEN
+                      00035 ;       GP4 = BLUE
+                      00036 ;       GP5 = YELLLOW
+                      00037 ;
+                      00038 ;************************************************************************
+                      00039 
+                      00040     list        p=12F629      
+                      00041     #include    <p12f629.inc>
+                      00001         LIST
+                      00002 
+                      00003 ;==========================================================================
+                      00004 ; Build date : Sep 19 2017
+                      00005 ;  MPASM PIC12F629 processor include
+                      00006 ; 
+                      00007 ;  (c) Copyright 1999-2017 Microchip Technology, All rights reserved
+                      00008 ;==========================================================================
+                      00009 
+                      00339         LIST
+                      00042     
+                      00043     errorlevel  -302            ; no warnings about registers not in bank 0
+MPASM 5.76             LED_PATTERNS_F629.ASM   12-10-2017  10:08:52         PAGE  2
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00044 
+                      00045 
+                      00046 ;***** CONFIGURATION
+                      00047                 ; ext reset, no code or data protect, no brownout detect,
+                      00048                 ; no watchdog, power-up timer, 4 Mhz int clock
+2007   3FA4           00049     __CONFIG    _MCLRE_ON & _CP_OFF & _CPD_OFF & _BODEN_OFF & _WDT_OFF & _PWRTE_ON & _INTRC_OSC_NOCLKOUT
+                      00050 
+                      00051 ;variables
+                      00052 ;       W_temp          res 1
+                      00053 ;       STATUS_temp     res 1
+Warning[207]: Found label after column 1. (d1)
+  00000020            00054         d1              equ 20h
+Warning[207]: Found label after column 1. (d2)
+  00000021            00055         d2              equ 21h
+Warning[207]: Found label after column 1. (dl1)
+  00000022            00056         dl1             equ 22h
+                      00057  
+                      00058 ;       current_step    res 1 ;current step in sequance
+                      00059         ;b'12345678'
+                      00060  
+                      00061  
+                      00062  
+                      00063 ;***** RESET VECTOR *****************************************************
+                      00064 RESET   CODE    0x0000          ; processor reset vector
+                      00065         ; calibrate internal RC oscillator
+0000   23FF           00066         call    0x03FF          ; retrieve factory calibration value 
+0001   1683           00067         banksel OSCCAL          ;   (stored at 0x3FF as a retlw k)
+0002   0090           00068         movwf   OSCCAL          ;   then update OSCCAL
+                      00069 
+0003   2???           00070          goto start     
+                      00071         
+                      00072         
+                      00073 ; ISR VECTOR
+                      00074 ;ISR    CODE    0x0004
+                      00075         ;save w and status
+                      00076 ;       movwf   W_temp
+                      00077 ;       movf STATUS,w
+                      00078 ;       movwf STATUS_temp
+                      00079         
+                      00080         ;ISR CODE HERE
+                      00081         
+                      00082         
+                      00083         
+                      00084         ;restore w and status
+                      00085 ;isr_end
+                      00086 ;       movf  STATUS_temp,w
+                      00087 ;       movwf STATUS
+                      00088 ;       swapf W_temp,f
+                      00089 ;       swapf W_temp,w
+                      00090 ;       retfie ;return
+                      00091 
+                      00092 ;subroutines
+                      00093  
+MPASM 5.76             LED_PATTERNS_F629.ASM   12-10-2017  10:08:52         PAGE  3
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0004                  00094 random_noise
+                      00095  
+0004   303C           00096 led1    movlw   b'00111100' ; LED1
+0005   1683           00097         banksel TRISIO
+0006   0085           00098         movwf   TRISIO
+0007   3001           00099         movlw   b'00000001'
+0008   1283           00100         banksel GPIO
+0009   0085           00101         movwf   GPIO
+                      00102         
+                      00103         
+000A   3001           00104         movlw   .1
+000B   00A2           00105         movwf   dl1
+000C                  00106 led1_d
+000C   0BA2           00107         decfsz  dl1, f
+000D   2???           00108         goto    led1_d
+000E   0185           00109         clrf    GPIO
+000F   0008           00110         return
+                      00111         
+0010   303C           00112 led2    movlw   b'00111100' ; LED2
+0011   1683           00113         banksel TRISIO
+0012   0085           00114         movwf   TRISIO
+0013   3002           00115         movlw   b'00000010'
+0014   1283           00116         banksel GPIO
+0015   0085           00117         movwf   GPIO
+                      00118         
+0016   3001           00119         movlw   .1
+0017   00A2           00120         movwf   dl1
+0018                  00121 led2_d
+0018   0BA2           00122         decfsz  dl1, f
+0019   2???           00123         goto    led2_d
+001A   0185           00124         clrf    GPIO
+001B   0008           00125         return
+                      00126         
+001C   303A           00127 led3    movlw   b'00111010' ; LED3
+001D   1683           00128         banksel TRISIO
+001E   0085           00129         movwf   TRISIO
+001F   3001           00130         movlw   b'00000001'
+0020   1283           00131         banksel GPIO
+0021   0085           00132         movwf   GPIO
+                      00133         
+0022   3001           00134         movlw   .1
+0023   00A2           00135         movwf   dl1
+0024                  00136 led3_d
+0024   0BA2           00137         decfsz  dl1, f
+0025   2???           00138         goto    led3_d
+0026   0185           00139         clrf    GPIO
+0027   0008           00140         return
+                      00141         
+0028   303A           00142 led4    movlw   b'00111010' ; LED4
+0029   1683           00143         banksel TRISIO
+002A   0085           00144         movwf   TRISIO
+002B   3004           00145         movlw   b'00000100'
+002C   1283           00146         banksel GPIO
+MPASM 5.76             LED_PATTERNS_F629.ASM   12-10-2017  10:08:52         PAGE  4
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+002D   0085           00147         movwf   GPIO
+                      00148         
+002E   3001           00149         movlw   .1
+002F   00A2           00150         movwf   dl1
+0030                  00151 led4_d
+0030   0BA2           00152         decfsz  dl1, f
+0031   2???           00153         goto    led4_d
+0032   0185           00154         clrf    GPIO
+0033   0008           00155         return
+                      00156         
+0034   302E           00157 led5    movlw   b'00101110' ; LED5
+0035   1683           00158         banksel TRISIO
+0036   0085           00159         movwf   TRISIO
+0037   3001           00160         movlw   b'00000001'
+0038   1283           00161         banksel GPIO
+0039   0085           00162         movwf   GPIO
+                      00163         
+003A   3001           00164         movlw   .1
+003B   00A2           00165         movwf   dl1
+003C                  00166 led5_d
+003C   0BA2           00167         decfsz  dl1, f
+003D   2???           00168         goto    led5_d
+003E   0185           00169         clrf    GPIO
+003F   0008           00170         return
+                      00171         
+0040   302E           00172 led6    movlw   b'00101110' ; LED6
+0041   1683           00173         banksel TRISIO
+0042   0085           00174         movwf   TRISIO
+0043   3010           00175         movlw   b'00010000'
+0044   1283           00176         banksel GPIO
+0045   0085           00177         movwf   GPIO
+                      00178         
+0046   3001           00179         movlw   .1
+0047   00A2           00180         movwf   dl1
+0048                  00181 led6_d
+0048   0BA2           00182         decfsz  dl1, f
+0049   2???           00183         goto    led6_d
+004A   0185           00184         clrf    GPIO
+004B   0008           00185         return
+                      00186         
+004C   301E           00187 led7    movlw   b'00011110' ; LED7
+004D   1683           00188         banksel TRISIO
+004E   0085           00189         movwf   TRISIO
+004F   3001           00190         movlw   b'00000001'
+0050   1283           00191         banksel GPIO
+0051   0085           00192         movwf   GPIO
+                      00193         
+0052   3001           00194         movlw   .1
+0053   00A2           00195         movwf   dl1
+0054                  00196 led7_d
+0054   0BA2           00197         decfsz  dl1, f
+0055   2???           00198         goto    led7_d
+0056   0185           00199         clrf    GPIO
+MPASM 5.76             LED_PATTERNS_F629.ASM   12-10-2017  10:08:52         PAGE  5
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0057   0008           00200         return
+                      00201         
+0058   301E           00202 led8    movlw   b'00011110' ; LED8
+0059   1683           00203         banksel TRISIO
+005A   0085           00204         movwf   TRISIO
+005B   3020           00205         movlw   b'00100000'
+005C   1283           00206         banksel GPIO
+005D   0085           00207         movwf   GPIO
+                      00208         
+005E   3001           00209         movlw   .1
+005F   00A2           00210         movwf   dl1
+0060                  00211 led8_d
+0060   0BA2           00212         decfsz  dl1, f
+0061   2???           00213         goto    led8_d
+0062   0185           00214         clrf    GPIO
+0063   0008           00215         return
+                      00216  
+0064   304F           00217 d_250ms movlw   .79
+0065   00A0           00218         movwf   d1
+0066   30C4           00219         movlw   .196
+0067   00A1           00220         movwf   d2
+0068   0008           00221         return
+                      00222 
+0069   301F           00223 d_100ms movlw   .31
+006A   00A0           00224         movwf   d1
+006B   304F           00225         movlw   .79
+006C   00A1           00226         movwf   d2
+006D   0008           00227         return
+                      00228 
+006E   3057           00229 d_25ms  movlw   .87
+006F   00A0           00230         movwf   d1
+0070   300E           00231         movlw   .14
+0071   00A1           00232         movwf   d2
+0072   0008           00233         return
+                      00234         
+0073   30CF           00235 d_10ms  movlw   .207
+0074   00A0           00236         movwf   d1
+0075   3008           00237         movlw   .8
+0076   00A1           00238         movwf   d2
+0077   0008           00239         return
+                      00240 
+0078   30C7           00241 d_1ms   movlw   .199
+0079   00A0           00242         movwf   d1
+007A   3001           00243         movlw   .1
+007B   00A1           00244         movwf   d2
+007C   0008           00245         return
+                      00246         
+007D                  00247 d_start 
+007D   0BA0           00248         decfsz  d1, f
+007E   2???           00249         goto    $+2
+007F   0BA1           00250         decfsz  d2, f
+0080   2???           00251         goto    d_start
+0081   0008           00252         return
+MPASM 5.76             LED_PATTERNS_F629.ASM   12-10-2017  10:08:52         PAGE  6
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00253 
+                      00254         
+                      00255 ;sequences
+                      00256 
+0082                  00257 SEQ1
+                      00258         
+                      00259 
+0082   2???           00260         call d_10ms     
+0083                  00261 seq1_1  
+0083   2???           00262         call led1
+                      00263         
+0084   0BA0           00264         decfsz  d1, f
+0085   2???           00265         goto    $+2
+0086   0BA1           00266         decfsz  d2, f
+0087   2???           00267         goto    seq1_1
+                      00268         
+0088   2???           00269         call d_10ms     
+0089                  00270 seq1_2  
+0089   2???           00271         call led2
+                      00272         
+008A   0BA0           00273         decfsz  d1, f
+008B   2???           00274         goto    $+2
+008C   0BA1           00275         decfsz  d2, f
+008D   2???           00276         goto    seq1_2
+                      00277         
+008E   2???           00278         call d_10ms     
+008F                  00279 seq1_3  
+008F   2???           00280         call led3
+                      00281         
+0090   0BA0           00282         decfsz  d1, f
+0091   2???           00283         goto    $+2
+0092   0BA1           00284         decfsz  d2, f
+0093   2???           00285         goto    seq1_3
+                      00286         
+0094   2???           00287         call d_10ms     
+0095                  00288 seq1_4  
+0095   2???           00289         call led4
+                      00290         
+0096   0BA0           00291         decfsz  d1, f
+0097   2???           00292         goto    $+2
+0098   0BA1           00293         decfsz  d2, f
+0099   2???           00294         goto    seq1_4
+                      00295 
+009A   2???           00296         call d_10ms
+009B                  00297 seq1_5  
+009B   2???           00298         call led5
+                      00299         
+009C   0BA0           00300         decfsz  d1, f
+009D   2???           00301         goto    $+2
+009E   0BA1           00302         decfsz  d2, f
+009F   2???           00303         goto    seq1_5
+                      00304     
+00A0   2???           00305         call d_10ms
+MPASM 5.76             LED_PATTERNS_F629.ASM   12-10-2017  10:08:52         PAGE  7
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+00A1                  00306 seq1_6  
+00A1   2???           00307         call led6
+                      00308         
+00A2   0BA0           00309         decfsz  d1, f
+00A3   2???           00310         goto    $+2
+00A4   0BA1           00311         decfsz  d2, f
+00A5   2???           00312         goto    seq1_6
+                      00313         
+00A6   2???           00314         call d_10ms
+00A7                  00315 seq1_7  
+00A7   2???           00316         call led7
+                      00317         
+00A8   0BA0           00318         decfsz  d1, f
+00A9   2???           00319         goto    $+2
+00AA   0BA1           00320         decfsz  d2, f
+00AB   2???           00321         goto    seq1_7
+                      00322         
+                      00323         
+00AC   2???           00324         call d_10ms
+00AD                  00325 seq1_8  
+00AD   2???           00326         call led8
+                      00327         
+00AE   0BA0           00328         decfsz  d1, f
+00AF   2???           00329         goto    $+2
+00B0   0BA1           00330         decfsz  d2, f
+00B1   2???           00331         goto    seq1_8
+                      00332         
+00B2   0008           00333         return
+                      00334         
+00B3                  00335 SEQ2
+                      00336         
+                      00337 
+00B3   2???           00338         call d_10ms     
+00B4                  00339 seq2_1  
+00B4   2???           00340         call led8
+                      00341         
+00B5   0BA0           00342         decfsz  d1, f
+00B6   2???           00343         goto    $+2
+00B7   0BA1           00344         decfsz  d2, f
+00B8   2???           00345         goto    seq2_1
+                      00346         
+00B9   2???           00347         call d_10ms     
+00BA                  00348 seq2_2  
+00BA   2???           00349         call led7
+                      00350         
+00BB   0BA0           00351         decfsz  d1, f
+00BC   2???           00352         goto    $+2
+00BD   0BA1           00353         decfsz  d2, f
+00BE   2???           00354         goto    seq2_2
+                      00355         
+00BF   2???           00356         call d_10ms     
+00C0                  00357 seq2_3  
+00C0   2???           00358         call led6
+MPASM 5.76             LED_PATTERNS_F629.ASM   12-10-2017  10:08:52         PAGE  8
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00359         
+00C1   0BA0           00360         decfsz  d1, f
+00C2   2???           00361         goto    $+2
+00C3   0BA1           00362         decfsz  d2, f
+00C4   2???           00363         goto    seq2_3
+                      00364         
+00C5   2???           00365         call d_10ms     
+00C6                  00366 seq2_4  
+00C6   2???           00367         call led5
+                      00368         
+00C7   0BA0           00369         decfsz  d1, f
+00C8   2???           00370         goto    $+2
+00C9   0BA1           00371         decfsz  d2, f
+00CA   2???           00372         goto    seq2_4
+                      00373 
+00CB   2???           00374         call d_10ms
+00CC                  00375 seq2_5  
+00CC   2???           00376         call led4
+                      00377         
+00CD   0BA0           00378         decfsz  d1, f
+00CE   2???           00379         goto    $+2
+00CF   0BA1           00380         decfsz  d2, f
+00D0   2???           00381         goto    seq2_5
+                      00382     
+00D1   2???           00383         call d_10ms
+00D2                  00384 seq2_6  
+00D2   2???           00385         call led3
+                      00386         
+00D3   0BA0           00387         decfsz  d1, f
+00D4   2???           00388         goto    $+2
+00D5   0BA1           00389         decfsz  d2, f
+00D6   2???           00390         goto    seq2_6
+                      00391         
+00D7   2???           00392         call d_10ms
+00D8                  00393 seq2_7  
+00D8   2???           00394         call led2
+                      00395         
+00D9   0BA0           00396         decfsz  d1, f
+00DA   2???           00397         goto    $+2
+00DB   0BA1           00398         decfsz  d2, f
+00DC   2???           00399         goto    seq2_7
+                      00400         
+                      00401         
+00DD   2???           00402         call d_10ms
+00DE                  00403 seq2_8  
+00DE   2???           00404         call led1
+                      00405         
+00DF   0BA0           00406         decfsz  d1, f
+00E0   2???           00407         goto    $+2
+00E1   0BA1           00408         decfsz  d2, f
+00E2   2???           00409         goto    seq2_8
+                      00410         
+00E3   0008           00411         return
+MPASM 5.76             LED_PATTERNS_F629.ASM   12-10-2017  10:08:52         PAGE  9
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00412         
+                      00413         
+00E4                  00414 SEQ3
+                      00415         
+                      00416     ;4,5
+00E4   2???           00417         call d_25ms     
+00E5                  00418 seq3_1  
+00E5   2???           00419         call led4
+00E6   2???           00420         call led5
+                      00421         
+00E7   0BA0           00422         decfsz  d1, f
+00E8   2???           00423         goto    $+2
+00E9   0BA1           00424         decfsz  d2, f
+00EA   2???           00425         goto    seq3_1
+                      00426         
+                      00427     ;3,6
+00EB   2???           00428         call d_25ms     
+00EC                  00429 seq3_2  
+00EC   2???           00430         call led3
+00ED   2???           00431         call led6
+                      00432         
+00EE   0BA0           00433         decfsz  d1, f
+00EF   2???           00434         goto    $+2
+00F0   0BA1           00435         decfsz  d2, f
+00F1   2???           00436         goto    seq3_2
+                      00437         
+                      00438     ;2,7
+00F2   2???           00439         call d_25ms     
+00F3                  00440 seq3_3  
+00F3   2???           00441         call led2
+00F4   2???           00442         call led7
+                      00443         
+00F5   0BA0           00444         decfsz  d1, f
+00F6   2???           00445         goto    $+2
+00F7   0BA1           00446         decfsz  d2, f
+00F8   2???           00447         goto    seq3_3
+                      00448         
+                      00449     ;1,8
+00F9   2???           00450         call d_25ms     
+00FA                  00451 seq3_4  
+00FA   2???           00452         call led1
+00FB   2???           00453         call led8
+                      00454         
+00FC   0BA0           00455         decfsz  d1, f
+00FD   2???           00456         goto    $+2
+00FE   0BA1           00457         decfsz  d2, f
+00FF   2???           00458         goto    seq3_4
+                      00459     
+                      00460     ;2,7
+0100   2???           00461         call d_25ms
+0101                  00462 seq3_5  
+0101   2???           00463         call led2
+0102   2???           00464         call led7
+MPASM 5.76             LED_PATTERNS_F629.ASM   12-10-2017  10:08:52         PAGE 10
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00465         
+0103   0BA0           00466         decfsz  d1, f
+0104   2???           00467         goto    $+2
+0105   0BA1           00468         decfsz  d2, f
+0106   2???           00469         goto    seq3_5
+                      00470     
+                      00471     ;3,6
+0107   2???           00472         call d_25ms
+0108                  00473 seq3_6  
+0108   2???           00474         call led3
+0109   2???           00475         call led6
+                      00476         
+010A   0BA0           00477         decfsz  d1, f
+010B   2???           00478         goto    $+2
+010C   0BA1           00479         decfsz  d2, f
+010D   2???           00480         goto    seq3_6
+                      00481         
+                      00482     ;4,5
+010E   2???           00483         call d_25ms
+010F                  00484 seq3_7  
+010F   2???           00485         call led4
+0110   2???           00486         call led5
+                      00487         
+0111   0BA0           00488         decfsz  d1, f
+0112   2???           00489         goto    $+2
+0113   0BA1           00490         decfsz  d2, f
+0114   2???           00491         goto    seq3_7
+                      00492         
+0115   0008           00493         return
+                      00494         
+0116                  00495 SEQ4
+                      00496         
+                      00497 
+0116   2???           00498         call d_10ms     
+0117                  00499 seq4_1  
+0117   2???           00500         call led1
+                      00501         
+0118   0BA0           00502         decfsz  d1, f
+0119   2???           00503         goto    $+2
+011A   0BA1           00504         decfsz  d2, f
+011B   2???           00505         goto    seq4_1
+                      00506         
+011C   2???           00507         call d_10ms     
+011D                  00508 seq4_2  
+011D   2???           00509         call led1
+011E   2???           00510         call led2
+                      00511         
+011F   0BA0           00512         decfsz  d1, f
+0120   2???           00513         goto    $+2
+0121   0BA1           00514         decfsz  d2, f
+0122   2???           00515         goto    seq4_2
+                      00516         
+0123   2???           00517         call d_10ms     
+MPASM 5.76             LED_PATTERNS_F629.ASM   12-10-2017  10:08:52         PAGE 11
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0124                  00518 seq4_3  
+0124   2???           00519         call led1
+0125   2???           00520         call led2
+0126   2???           00521         call led3
+                      00522         
+0127   0BA0           00523         decfsz  d1, f
+0128   2???           00524         goto    $+2
+0129   0BA1           00525         decfsz  d2, f
+012A   2???           00526         goto    seq4_3
+                      00527         
+012B   2???           00528         call d_10ms     
+012C                  00529 seq4_4  
+012C   2???           00530         call led1
+012D   2???           00531         call led2
+012E   2???           00532         call led3
+012F   2???           00533         call led4
+                      00534         
+0130   0BA0           00535         decfsz  d1, f
+0131   2???           00536         goto    $+2
+0132   0BA1           00537         decfsz  d2, f
+0133   2???           00538         goto    seq4_4
+                      00539 
+0134   2???           00540         call d_10ms
+0135                  00541 seq4_5  
+0135   2???           00542         call led1
+0136   2???           00543         call led2
+0137   2???           00544         call led3
+0138   2???           00545         call led4
+0139   2???           00546         call led5
+                      00547         
+013A   0BA0           00548         decfsz  d1, f
+013B   2???           00549         goto    $+2
+013C   0BA1           00550         decfsz  d2, f
+013D   2???           00551         goto    seq4_5
+                      00552     
+013E   2???           00553         call d_10ms
+013F                  00554 seq4_6  
+013F   2???           00555         call led1
+0140   2???           00556         call led2
+0141   2???           00557         call led3
+0142   2???           00558         call led4
+0143   2???           00559         call led5
+0144   2???           00560         call led6
+                      00561         
+0145   0BA0           00562         decfsz  d1, f
+0146   2???           00563         goto    $+2
+0147   0BA1           00564         decfsz  d2, f
+0148   2???           00565         goto    seq4_6
+                      00566         
+0149   2???           00567         call d_10ms
+014A                  00568 seq4_7  
+014A   2???           00569         call led1
+014B   2???           00570         call led2
+MPASM 5.76             LED_PATTERNS_F629.ASM   12-10-2017  10:08:52         PAGE 12
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+014C   2???           00571         call led3
+014D   2???           00572         call led4
+014E   2???           00573         call led5
+014F   2???           00574         call led6
+0150   2???           00575         call led7
+                      00576         
+0151   0BA0           00577         decfsz  d1, f
+0152   2???           00578         goto    $+2
+0153   0BA1           00579         decfsz  d2, f
+0154   2???           00580         goto    seq4_7
+                      00581         
+                      00582         
+0155   2???           00583         call d_10ms
+0156                  00584 seq4_8  
+0156   2???           00585         call led1
+0157   2???           00586         call led2
+0158   2???           00587         call led3
+0159   2???           00588         call led4
+015A   2???           00589         call led5
+015B   2???           00590         call led6
+015C   2???           00591         call led7
+015D   2???           00592         call led8
+                      00593         
+015E   0BA0           00594         decfsz  d1, f
+015F   2???           00595         goto    $+2
+0160   0BA1           00596         decfsz  d2, f
+0161   2???           00597         goto    seq4_8
+                      00598         
+0162   0008           00599         return
+                      00600         
+0163                  00601 SEQ5
+                      00602         
+                      00603 
+0163   2???           00604         call d_10ms     
+0164                  00605 seq5_1  
+0164   2???           00606         call led1
+0165   2???           00607         call led2
+0166   2???           00608         call led3
+0167   2???           00609         call led4
+0168   2???           00610         call led5
+0169   2???           00611         call led6
+016A   2???           00612         call led7
+016B   2???           00613         call led8
+                      00614         
+016C   0BA0           00615         decfsz  d1, f
+016D   2???           00616         goto    $+2
+016E   0BA1           00617         decfsz  d2, f
+016F   2???           00618         goto    seq5_1
+                      00619         
+0170   2???           00620         call d_10ms     
+0171                  00621 seq5_2  
+0171   2???           00622         call led1
+0172   2???           00623         call led2
+MPASM 5.76             LED_PATTERNS_F629.ASM   12-10-2017  10:08:52         PAGE 13
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0173   2???           00624         call led3
+0174   2???           00625         call led4
+0175   2???           00626         call led5
+0176   2???           00627         call led6
+0177   2???           00628         call led7
+                      00629         
+0178   0BA0           00630         decfsz  d1, f
+0179   2???           00631         goto    $+2
+017A   0BA1           00632         decfsz  d2, f
+017B   2???           00633         goto    seq5_2
+                      00634         
+017C   2???           00635         call d_10ms     
+017D                  00636 seq5_3  
+017D   2???           00637         call led1
+017E   2???           00638         call led2
+017F   2???           00639         call led3
+0180   2???           00640         call led4
+0181   2???           00641         call led5
+0182   2???           00642         call led6       
+                      00643         
+0183   0BA0           00644         decfsz  d1, f
+0184   2???           00645         goto    $+2
+0185   0BA1           00646         decfsz  d2, f
+0186   2???           00647         goto    seq5_3
+                      00648         
+0187   2???           00649         call d_10ms     
+0188                  00650 seq5_4  
+0188   2???           00651         call led1
+0189   2???           00652         call led2
+018A   2???           00653         call led3
+018B   2???           00654         call led4
+018C   2???           00655         call led5       
+                      00656         
+018D   0BA0           00657         decfsz  d1, f
+018E   2???           00658         goto    $+2
+018F   0BA1           00659         decfsz  d2, f
+0190   2???           00660         goto    seq5_4
+                      00661 
+0191   2???           00662         call d_10ms
+0192                  00663 seq5_5  
+0192   2???           00664         call led1
+0193   2???           00665         call led2
+0194   2???           00666         call led3
+0195   2???           00667         call led4
+                      00668         
+0196   0BA0           00669         decfsz  d1, f
+0197   2???           00670         goto    $+2
+0198   0BA1           00671         decfsz  d2, f
+0199   2???           00672         goto    seq5_5
+                      00673     
+019A   2???           00674         call d_10ms
+019B                  00675 seq5_6  
+019B   2???           00676         call led1
+MPASM 5.76             LED_PATTERNS_F629.ASM   12-10-2017  10:08:52         PAGE 14
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+019C   2???           00677         call led2
+019D   2???           00678         call led3
+                      00679         
+019E   0BA0           00680         decfsz  d1, f
+019F   2???           00681         goto    $+2
+01A0   0BA1           00682         decfsz  d2, f
+01A1   2???           00683         goto    seq5_6
+                      00684         
+01A2   2???           00685         call d_10ms
+01A3                  00686 seq5_7  
+01A3   2???           00687         call led1
+01A4   2???           00688         call led2
+                      00689         
+01A5   0BA0           00690         decfsz  d1, f
+01A6   2???           00691         goto    $+2
+01A7   0BA1           00692         decfsz  d2, f
+01A8   2???           00693         goto    seq5_7
+                      00694         
+                      00695         
+01A9   2???           00696         call d_10ms
+01AA                  00697 seq5_8  
+01AA   2???           00698         call led1
+                      00699         
+01AB   0BA0           00700         decfsz  d1, f
+01AC   2???           00701         goto    $+2
+01AD   0BA1           00702         decfsz  d2, f
+01AE   2???           00703         goto    seq5_8
+                      00704         
+01AF   0008           00705         return  
+                      00706         
+                      00707 ;***** MAIN PROGRAM *****************************************************
+                      00708 
+                      00709 ;***** Initialisation
+01B0                  00710 start
+                      00711         
+01B0   2???           00712         call SEQ1
+01B1   2???           00713         call d_100ms
+01B2   2???           00714         call d_start
+01B3   2???           00715         call SEQ2
+01B4   2???           00716         call d_100ms
+01B5   2???           00717         call d_start
+                      00718         
+                      00719         
+                      00720         ; loop forever          
+01B6   2???           00721         goto    start               
+                      00722 
+                      00723 
+3FA4                  00724         END
+MPASM 5.76             LED_PATTERNS_F629.ASM   12-10-2017  10:08:52         PAGE 15
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+ADIE                              00000006
+ADIF                              00000006
+C                                 00000000
+CAL0                              00000002
+CAL1                              00000003
+CAL2                              00000004
+CAL3                              00000005
+CAL4                              00000006
+CAL5                              00000007
+CINV                              00000004
+CIS                               00000003
+CM0                               00000000
+CM1                               00000001
+CM2                               00000002
+CMCON                             00000019
+CMIE                              00000003
+CMIF                              00000003
+COUT                              00000006
+DC                                00000001
+EEADR                             0000009B
+EECON1                            0000009C
+EECON2                            0000009D
+EEDAT                             0000009A
+EEDATA                            0000009A
+EEIE                              00000007
+EEIF                              00000007
+F                                 00000001
+FSR                               00000004
+GIE                               00000007
+GP0                               00000000
+GP1                               00000001
+GP2                               00000002
+GP3                               00000003
+GP4                               00000004
+GP5                               00000005
+GPIE                              00000003
+GPIF                              00000000
+GPIO                              00000005
+GPIO0                             00000000
+GPIO1                             00000001
+GPIO2                             00000002
+GPIO3                             00000003
+GPIO4                             00000004
+GPIO5                             00000005
+INDF                              00000000
+INTCON                            0000000B
+INTE                              00000004
+INTEDG                            00000006
+INTF                              00000001
+IOC                               00000096
+IOC0                              00000000
+IOC1                              00000001
+IOC2                              00000002
+MPASM 5.76             LED_PATTERNS_F629.ASM   12-10-2017  10:08:52         PAGE 16
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+IOC3                              00000003
+IOC4                              00000004
+IOC5                              00000005
+IOCB                              00000096
+IOCB0                             00000000
+IOCB1                             00000001
+IOCB2                             00000002
+IOCB3                             00000003
+IOCB4                             00000004
+IOCB5                             00000005
+IRP                               00000007
+NOT_BOD                           00000000
+NOT_BOR                           00000000
+NOT_GPPU                          00000007
+NOT_PD                            00000003
+NOT_POR                           00000001
+NOT_T1SYNC                        00000002
+NOT_TO                            00000004
+OPTION_REG                        00000081
+OSCCAL                            00000090
+PCL                               00000002
+PCLATH                            0000000A
+PCON                              0000008E
+PEIE                              00000006
+PIE1                              0000008C
+PIR1                              0000000C
+PS0                               00000000
+PS1                               00000001
+PS2                               00000002
+PSA                               00000003
+RD                                00000000
+RP0                               00000005
+RP1                               00000006
+SEQ1                              00000082
+SEQ2                              000000B3
+SEQ3                              000000E4
+SEQ4                              00000116
+SEQ5                              00000163
+STATUS                            00000003
+T0CS                              00000005
+T0IE                              00000005
+T0IF                              00000002
+T0SE                              00000004
+T1CKPS0                           00000004
+T1CKPS1                           00000005
+T1CON                             00000010
+T1IE                              00000000
+T1IF                              00000000
+T1OSCEN                           00000003
+TMR0                              00000001
+TMR0IE                            00000005
+TMR0IF                            00000002
+TMR1                              0000000E
+MPASM 5.76             LED_PATTERNS_F629.ASM   12-10-2017  10:08:52         PAGE 17
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+TMR1CS                            00000001
+TMR1GE                            00000006
+TMR1H                             0000000F
+TMR1IE                            00000000
+TMR1IF                            00000000
+TMR1L                             0000000E
+TMR1ON                            00000000
+TRISIO                            00000085
+TRISIO0                           00000000
+TRISIO1                           00000001
+TRISIO2                           00000002
+TRISIO3                           00000003
+TRISIO4                           00000004
+TRISIO5                           00000005
+VR0                               00000000
+VR1                               00000001
+VR2                               00000002
+VR3                               00000003
+VRCON                             00000099
+VREN                              00000007
+VRR                               00000005
+W                                 00000000
+WPU                               00000095
+WPU0                              00000000
+WPU1                              00000001
+WPU2                              00000002
+WPU4                              00000004
+WPU5                              00000005
+WR                                00000001
+WREN                              00000002
+WRERR                             00000003
+Z                                 00000002
+_BODEN_OFF                        00003FBF
+_BODEN_ON                         00003FFF
+_BOREN_OFF                        00003FBF
+_BOREN_ON                         00003FFF
+_CONFIG                           00002007
+_CPD_OFF                          00003FFF
+_CPD_ON                           00003EFF
+_CP_OFF                           00003FFF
+_CP_ON                            00003F7F
+_DEVID1                           00002006
+_EC_OSC                           00003FFB
+_EXTRC_OSC_CLKOUT                 00003FFF
+_EXTRC_OSC_NOCLKOUT               00003FFE
+_FOSC_EC                          00003FFB
+_FOSC_EXTRCCLK                    00003FFF
+_FOSC_EXTRCIO                     00003FFE
+_FOSC_HS                          00003FFA
+_FOSC_INTRCCLK                    00003FFD
+_FOSC_INTRCIO                     00003FFC
+_FOSC_LP                          00003FF8
+_FOSC_XT                          00003FF9
+MPASM 5.76             LED_PATTERNS_F629.ASM   12-10-2017  10:08:52         PAGE 18
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+_HS_OSC                           00003FFA
+_IDLOC0                           00002000
+_IDLOC1                           00002001
+_IDLOC2                           00002002
+_IDLOC3                           00002003
+_INTRC_OSC_CLKOUT                 00003FFD
+_INTRC_OSC_NOCLKOUT               00003FFC
+_LP_OSC                           00003FF8
+_MCLRE_OFF                        00003FDF
+_MCLRE_ON                         00003FFF
+_PWRTE_OFF                        00003FFF
+_PWRTE_ON                         00003FEF
+_RESET_007E                       0000007E
+_RESET_0085                       00000085
+_RESET_008B                       0000008B
+_RESET_0091                       00000091
+_RESET_0097                       00000097
+_RESET_009D                       0000009D
+_RESET_00A3                       000000A3
+_RESET_00A9                       000000A9
+_RESET_00AF                       000000AF
+_RESET_00B6                       000000B6
+_RESET_00BC                       000000BC
+_RESET_00C2                       000000C2
+_RESET_00C8                       000000C8
+_RESET_00CE                       000000CE
+_RESET_00D4                       000000D4
+_RESET_00DA                       000000DA
+_RESET_00E0                       000000E0
+_RESET_00E8                       000000E8
+_RESET_00EF                       000000EF
+_RESET_00F6                       000000F6
+_RESET_00FD                       000000FD
+_RESET_0104                       00000104
+_RESET_010B                       0000010B
+_RESET_0112                       00000112
+_RESET_0119                       00000119
+_RESET_0120                       00000120
+_RESET_0128                       00000128
+_RESET_0131                       00000131
+_RESET_013B                       0000013B
+_RESET_0146                       00000146
+_RESET_0152                       00000152
+_RESET_015F                       0000015F
+_RESET_016D                       0000016D
+_RESET_0179                       00000179
+_RESET_0184                       00000184
+_RESET_018E                       0000018E
+_RESET_0197                       00000197
+_RESET_019F                       0000019F
+_RESET_01A6                       000001A6
+_RESET_01AC                       000001AC
+_WDTE_OFF                         00003FF7
+MPASM 5.76             LED_PATTERNS_F629.ASM   12-10-2017  10:08:52         PAGE 19
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+_WDTE_ON                          00003FFF
+_WDT_OFF                          00003FF7
+_WDT_ON                           00003FFF
+_XT_OSC                           00003FF9
+__12F629                          00000001
+d1                                00000020
+d2                                00000021
+d_100ms                           00000069
+d_10ms                            00000073
+d_1ms                             00000078
+d_250ms                           00000064
+d_25ms                            0000006E
+d_start                           0000007D
+dl1                               00000022
+led1                              00000004
+led1_d                            0000000C
+led2                              00000010
+led2_d                            00000018
+led3                              0000001C
+led3_d                            00000024
+led4                              00000028
+led4_d                            00000030
+led5                              00000034
+led5_d                            0000003C
+led6                              00000040
+led6_d                            00000048
+led7                              0000004C
+led7_d                            00000054
+led8                              00000058
+led8_d                            00000060
+random_noise                      00000004
+seq1_1                            00000083
+seq1_2                            00000089
+seq1_3                            0000008F
+seq1_4                            00000095
+seq1_5                            0000009B
+seq1_6                            000000A1
+seq1_7                            000000A7
+seq1_8                            000000AD
+seq2_1                            000000B4
+seq2_2                            000000BA
+seq2_3                            000000C0
+seq2_4                            000000C6
+seq2_5                            000000CC
+seq2_6                            000000D2
+seq2_7                            000000D8
+seq2_8                            000000DE
+seq3_1                            000000E5
+seq3_2                            000000EC
+seq3_3                            000000F3
+seq3_4                            000000FA
+seq3_5                            00000101
+seq3_6                            00000108
+MPASM 5.76             LED_PATTERNS_F629.ASM   12-10-2017  10:08:52         PAGE 20
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+seq3_7                            0000010F
+seq4_1                            00000117
+seq4_2                            0000011D
+seq4_3                            00000124
+seq4_4                            0000012C
+seq4_5                            00000135
+seq4_6                            0000013F
+seq4_7                            0000014A
+seq4_8                            00000156
+seq5_1                            00000164
+seq5_2                            00000171
+seq5_3                            0000017D
+seq5_4                            00000188
+seq5_5                            00000192
+seq5_6                            0000019B
+seq5_7                            000001A3
+seq5_8                            000001AA
+start                             000001B0
+
+Errors   :     0
+Warnings :     3 reported,     0 suppressed
+Messages :     0 reported,     9 suppressed
+
+

@@ -1,0 +1,248 @@
+MPLINK 5.08, LINKER
+Linker Map File - Created Sun Dec 10 10:08:54 2017
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                    RESET       code   0x000000    program   0x00036e
+                   .cinit    romdata   0x0001b7    program   0x000004
+.config_2007_BUILD/DEFAULT/PRODUCTION/LED_PAT       code   0x002007    program   0x000002
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x0001b8      
+                            0x002007    0x002007      
+            442 out of 1158 program addresses used, program memory utilization is 38%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                     SEQ1   0x000082    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                     SEQ2   0x0000b3    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                     SEQ3   0x0000e4    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                     SEQ4   0x000116    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                     SEQ5   0x000163    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+              _RESET_007E   0x00007e    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+              _RESET_0085   0x000085    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+              _RESET_008B   0x00008b    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+              _RESET_0091   0x000091    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+              _RESET_0097   0x000097    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+              _RESET_009D   0x00009d    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+              _RESET_00A3   0x0000a3    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+              _RESET_00A9   0x0000a9    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+              _RESET_00AF   0x0000af    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+              _RESET_00B6   0x0000b6    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+              _RESET_00BC   0x0000bc    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+              _RESET_00C2   0x0000c2    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+              _RESET_00C8   0x0000c8    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+              _RESET_00CE   0x0000ce    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+              _RESET_00D4   0x0000d4    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+              _RESET_00DA   0x0000da    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+              _RESET_00E0   0x0000e0    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+              _RESET_00E8   0x0000e8    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+              _RESET_00EF   0x0000ef    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+              _RESET_00F6   0x0000f6    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+              _RESET_00FD   0x0000fd    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+              _RESET_0104   0x000104    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+              _RESET_010B   0x00010b    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+              _RESET_0112   0x000112    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+              _RESET_0119   0x000119    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+              _RESET_0120   0x000120    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+              _RESET_0128   0x000128    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+              _RESET_0131   0x000131    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+              _RESET_013B   0x00013b    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+              _RESET_0146   0x000146    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+              _RESET_0152   0x000152    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+              _RESET_015F   0x00015f    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+              _RESET_016D   0x00016d    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+              _RESET_0179   0x000179    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+              _RESET_0184   0x000184    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+              _RESET_018E   0x00018e    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+              _RESET_0197   0x000197    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+              _RESET_019F   0x00019f    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+              _RESET_01A6   0x0001a6    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+              _RESET_01AC   0x0001ac    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                  d_100ms   0x000069    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   d_10ms   0x000073    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                    d_1ms   0x000078    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                  d_250ms   0x000064    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   d_25ms   0x00006e    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                  d_start   0x00007d    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                     led1   0x000004    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   led1_d   0x00000c    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                     led2   0x000010    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   led2_d   0x000018    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                     led3   0x00001c    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   led3_d   0x000024    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                     led4   0x000028    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   led4_d   0x000030    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                     led5   0x000034    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   led5_d   0x00003c    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                     led6   0x000040    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   led6_d   0x000048    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                     led7   0x00004c    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   led7_d   0x000054    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                     led8   0x000058    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   led8_d   0x000060    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+             random_noise   0x000004    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   seq1_1   0x000083    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   seq1_2   0x000089    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   seq1_3   0x00008f    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   seq1_4   0x000095    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   seq1_5   0x00009b    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   seq1_6   0x0000a1    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   seq1_7   0x0000a7    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   seq1_8   0x0000ad    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   seq2_1   0x0000b4    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   seq2_2   0x0000ba    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   seq2_3   0x0000c0    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   seq2_4   0x0000c6    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   seq2_5   0x0000cc    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   seq2_6   0x0000d2    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   seq2_7   0x0000d8    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   seq2_8   0x0000de    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   seq3_1   0x0000e5    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   seq3_2   0x0000ec    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   seq3_3   0x0000f3    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   seq3_4   0x0000fa    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   seq3_5   0x000101    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   seq3_6   0x000108    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   seq3_7   0x00010f    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   seq4_1   0x000117    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   seq4_2   0x00011d    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   seq4_3   0x000124    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   seq4_4   0x00012c    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   seq4_5   0x000135    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   seq4_6   0x00013f    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   seq4_7   0x00014a    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   seq4_8   0x000156    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   seq5_1   0x000164    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   seq5_2   0x000171    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   seq5_3   0x00017d    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   seq5_4   0x000188    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   seq5_5   0x000192    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   seq5_6   0x00019b    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   seq5_7   0x0001a3    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   seq5_8   0x0001aa    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                    start   0x0001b0    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+             random_noise   0x000004    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                     led1   0x000004    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   led1_d   0x00000c    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                     led2   0x000010    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   led2_d   0x000018    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                     led3   0x00001c    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   led3_d   0x000024    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                     led4   0x000028    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   led4_d   0x000030    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                     led5   0x000034    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   led5_d   0x00003c    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                     led6   0x000040    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   led6_d   0x000048    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                     led7   0x00004c    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   led7_d   0x000054    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                     led8   0x000058    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   led8_d   0x000060    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                  d_250ms   0x000064    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                  d_100ms   0x000069    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   d_25ms   0x00006e    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   d_10ms   0x000073    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                    d_1ms   0x000078    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                  d_start   0x00007d    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+              _RESET_007E   0x00007e    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                     SEQ1   0x000082    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   seq1_1   0x000083    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+              _RESET_0085   0x000085    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   seq1_2   0x000089    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+              _RESET_008B   0x00008b    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   seq1_3   0x00008f    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+              _RESET_0091   0x000091    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   seq1_4   0x000095    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+              _RESET_0097   0x000097    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   seq1_5   0x00009b    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+              _RESET_009D   0x00009d    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   seq1_6   0x0000a1    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+              _RESET_00A3   0x0000a3    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   seq1_7   0x0000a7    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+              _RESET_00A9   0x0000a9    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   seq1_8   0x0000ad    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+              _RESET_00AF   0x0000af    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                     SEQ2   0x0000b3    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   seq2_1   0x0000b4    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+              _RESET_00B6   0x0000b6    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   seq2_2   0x0000ba    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+              _RESET_00BC   0x0000bc    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   seq2_3   0x0000c0    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+              _RESET_00C2   0x0000c2    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   seq2_4   0x0000c6    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+              _RESET_00C8   0x0000c8    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   seq2_5   0x0000cc    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+              _RESET_00CE   0x0000ce    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   seq2_6   0x0000d2    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+              _RESET_00D4   0x0000d4    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   seq2_7   0x0000d8    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+              _RESET_00DA   0x0000da    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   seq2_8   0x0000de    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+              _RESET_00E0   0x0000e0    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                     SEQ3   0x0000e4    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   seq3_1   0x0000e5    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+              _RESET_00E8   0x0000e8    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   seq3_2   0x0000ec    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+              _RESET_00EF   0x0000ef    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   seq3_3   0x0000f3    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+              _RESET_00F6   0x0000f6    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   seq3_4   0x0000fa    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+              _RESET_00FD   0x0000fd    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   seq3_5   0x000101    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+              _RESET_0104   0x000104    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   seq3_6   0x000108    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+              _RESET_010B   0x00010b    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   seq3_7   0x00010f    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+              _RESET_0112   0x000112    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                     SEQ4   0x000116    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   seq4_1   0x000117    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+              _RESET_0119   0x000119    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   seq4_2   0x00011d    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+              _RESET_0120   0x000120    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   seq4_3   0x000124    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+              _RESET_0128   0x000128    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   seq4_4   0x00012c    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+              _RESET_0131   0x000131    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   seq4_5   0x000135    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+              _RESET_013B   0x00013b    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   seq4_6   0x00013f    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+              _RESET_0146   0x000146    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   seq4_7   0x00014a    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+              _RESET_0152   0x000152    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   seq4_8   0x000156    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+              _RESET_015F   0x00015f    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                     SEQ5   0x000163    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   seq5_1   0x000164    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+              _RESET_016D   0x00016d    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   seq5_2   0x000171    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+              _RESET_0179   0x000179    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   seq5_3   0x00017d    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+              _RESET_0184   0x000184    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   seq5_4   0x000188    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+              _RESET_018E   0x00018e    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   seq5_5   0x000192    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+              _RESET_0197   0x000197    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   seq5_6   0x00019b    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+              _RESET_019F   0x00019f    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   seq5_7   0x0001a3    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+              _RESET_01A6   0x0001a6    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                   seq5_8   0x0001aa    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+              _RESET_01AC   0x0001ac    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+                    start   0x0001b0    program     static C:\Users\Matt\Documents\Projects\PIC12\MPLABX Projects\led_board_asm.X\led_patterns_f629.asm
+
+
